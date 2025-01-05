@@ -1,12 +1,14 @@
 <?php
 // Koneksi ke database
-$servername = "localhost"; // Ganti dengan server database Anda, jika berbeda
-$username = "root"; // Ganti dengan username database Anda
-$password = ""; // Ganti dengan password database Anda
-$dbname = "hsl_kebaya"; // Ganti dengan nama database Anda
+// $servername = "localhost"; // Ganti dengan server database Anda, jika berbeda
+// $username = "root"; // Ganti dengan username database Anda
+// $password = ""; // Ganti dengan password database Anda
+// $dbname = "hsl_kebaya"; // Ganti dengan nama database Anda
 
-// Membuat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
+// // Membuat koneksi
+// $conn = new mysqli($servername, $username, $password, $dbname);
+
+include './database/db.php';
 
 // Mengecek koneksi
 if ($conn->connect_error) {
