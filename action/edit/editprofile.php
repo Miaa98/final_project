@@ -1,11 +1,13 @@
 <?php
 // Koneksi ke database
-$conn = new mysqli("localhost", "root", "", "hsl_kebaya");
+// $conn = new mysqli("localhost", "root", "", "hsl_kebaya");
 
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+// // Cek koneksi
+// if ($conn->connect_error) {
+//     die("Koneksi gagal: " . $conn->connect_error);
+// }
+
+include '../../database/db.php';
 
 // Ambil ID dari URL
 $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;

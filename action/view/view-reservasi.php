@@ -260,6 +260,9 @@ if (!empty($kode_reservasi)) {
         if (status.toLowerCase() === 'paid') {
             window.location.href = 'view-detailpembayaran.php?kode_reservasi=' + kodeReservasi;
             return; // Stop the function execution here
+        } else  if (status.toLowerCase() === 'completed') {
+            window.location.href = 'view-detailpembayaran.php?kode_reservasi=' + kodeReservasi;
+            return; // Stop the function execution here
         }
 
         // Isi data ke modal untuk status selain 'paid'
