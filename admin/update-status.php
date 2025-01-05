@@ -1,35 +1,75 @@
 <?php
-session_start();
+session_start(); // Mulai session
 include '../database/db.php'; // Koneksi ke database
 
+// Cek apakah request adalah POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Pastikan kode_reservasi diterima dengan aman
-    if (isset($_POST['kode_reservasi'])) {
-        $kode_reservasi = $_POST['kode_reservasi'];
+    // Ambil kode_reservasi dari request
+    $kode_reservasi = $_POST['kode_reservasi'];
 
-        // Query untuk mengupdate status menjadi 'completed'
-        $query = "UPDATE reservations SET status = 'completed' WHERE kode_reservasi = ?";
-        $stmt = mysqli_prepare($conn, $query);
+    // Query untuk mengambil data reservasi (termasuk product_id dan quantity) - memastikan semua produk dalam reservasi
+    $query = "SELECT id_produk, quantity FROM reservations WHERE kode_reservasi = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $kode_reservasi);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, 's', $kode_reservasi);
-            $execute = mysqli_stmt_execute($stmt);
+    // Cek jika ada produk dalam reservasi
+    if ($result->num_rows > 0) {
+        while ($reservation = $result->fetch_assoc()) {
+            $product_id = $reservation['id_produk']; // Ambil product_id
+            $quantity = $reservation['quantity']; // Ambil quantity
 
-            if ($execute && mysqli_stmt_affected_rows($stmt) > 0) {
-                echo 'success'; // Berhasil mengupdate status
+            // Query untuk mendapatkan stok produk saat ini
+            $get_stock_query = "SELECT stock FROM products WHERE product_id = ?";
+            $stmt = $conn->prepare($get_stock_query);
+            $stmt->bind_param("i", $product_id);
+            $stmt->execute();
+            $stock_result = $stmt->get_result();
+            $product = $stock_result->fetch_assoc();
+
+            if ($product) {
+                $current_stock = $product['stock']; // Stok saat ini
+
+                // Update stok produk dengan menambahkannya kembali berdasarkan quantity
+                $new_stock = $current_stock + $quantity;
+                $update_stock_query = "UPDATE products SET stock = ? WHERE product_id = ?";
+                $stmt = $conn->prepare($update_stock_query);
+                $stmt->bind_param("ii", $new_stock, $product_id);
+                $stmt->execute();
+
+                // Cek apakah pengembalian stok berhasil
+                if ($stmt->affected_rows <= 0) {
+                    echo 'error: gagal mengupdate stok produk';
+                    exit();
+                }
             } else {
-                echo 'error'; // Gagal mengupdate status, mungkin karena kode_reservasi tidak ada
+                // Jika produk tidak ditemukan
+                echo 'error: produk tidak ditemukan';
+                exit();
             }
+        }
 
-            mysqli_stmt_close($stmt);
+        // Setelah stok semua produk dikembalikan, update status reservasi menjadi 'completed'
+        $update_status_query = "UPDATE reservations SET status = 'completed' WHERE kode_reservasi = ?";
+        $stmt = $conn->prepare($update_status_query);
+        $stmt->bind_param("s", $kode_reservasi);
+        $stmt->execute();
+
+        // Cek apakah status berhasil diperbarui
+        if ($stmt->affected_rows > 0) {
+            // Berikan respons 'success' jika berhasil
+            echo 'success';
         } else {
-            echo 'error'; // Gagal menyiapkan statement
+            // Jika gagal update status
+            echo 'error: gagal memperbarui status reservasi';
         }
     } else {
-        echo 'error'; // Jika kode_reservasi tidak dikirim
+        // Jika data reservasi tidak ditemukan
+        echo 'error: reservasi tidak ditemukan';
     }
-
-    mysqli_close($conn);
 } else {
-    echo 'error'; // Jika request bukan POST
+    // Berikan respons 'invalid request' jika request bukan POST
+    echo 'invalid request';
 }
+?>
