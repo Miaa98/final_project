@@ -167,34 +167,38 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
 
             <h3>Isi Form Reservasi</h3>
             <form action="../user/reservasi-user.php" method="POST">
-                <!-- Data produk yang dikirim secara hidden -->
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>" />
-                <input type="hidden" name="nama" value="<?php echo htmlspecialchars($nama); ?>" />
-                <input type="hidden" name="harga" value="<?php echo htmlspecialchars($harga); ?>" />
-                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>" />
+    <!-- Data produk yang dikirim secara hidden -->
+    <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>" />
+    <input type="hidden" name="nama" value="<?php echo htmlspecialchars($nama); ?>" />
+    <input type="hidden" name="harga" value="<?php echo htmlspecialchars($harga); ?>" />
+    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>" />
 
-                <!-- Tanggal Mulai Sewa -->
-                <label for="tanggal_mulai">Tanggal Mulai Sewa:</label>
-                <input type="date" name="tanggal_mulai" id="tanggal_mulai" required />
+    <!-- Tanggal Mulai Sewa -->
+    <label for="tanggal_mulai">Tanggal Mulai Sewa:</label>
+    <input type="date" name="tanggal_mulai" id="tanggal_mulai" required />
 
-                <!-- Tanggal Selesai Sewa -->
-                <label for="tanggal_selesai">Tanggal Selesai Sewa:</label>
-                <input type="date" name="tanggal_selesai" id="tanggal_selesai" required />
+    <!-- Tanggal Selesai Sewa -->
+    <label for="tanggal_selesai">Tanggal Selesai Sewa:</label>
+    <input type="date" name="tanggal_selesai" id="tanggal_selesai" required />
 
-                <!-- Durasi Sewa -->
-                <label for="durasi">Durasi Sewa (hari):</label>
-                <input type="number" name="durasi" id="durasi" min="1" readonly />
+    <!-- Durasi Sewa -->
+    <label for="durasi">Durasi Sewa (hari):</label>
+    <input type="number" name="durasi" id="durasi" min="1" readonly />
 
-                <!-- Total Harga -->
-                <label for="total_harga">Total Harga:</label>
-                <input type="text" name="total_harga" id="total_harga" readonly class="harga" value="Rp 0" />
+    <!-- Quantity (Jumlah Produk yang Dipesan) -->
+    <label for="quantity">Jumlah Produk (Qty):</label>
+    <input type="number" name="quantity" id="quantity" min="1" required />
 
-                <!-- Tanggal Reservasi (otomatis terisi dengan tanggal hari ini) -->
-                <label for="tanggal_reservasi">Tanggal Reservasi:</label>
-                <input type="date" name="tanggal_reservasi" id="tanggal_reservasi" readonly />
+    <!-- Total Harga -->
+    <label for="total_harga">Total Harga:</label>
+    <input type="text" name="total_harga" id="total_harga" readonly class="harga" value="Rp 0" />
 
-                <button type="submit">Kirim Reservasi</button>
-            </form>
+    <!-- Tanggal Reservasi (otomatis terisi dengan tanggal hari ini) -->
+    <label for="tanggal_reservasi">Tanggal Reservasi:</label>
+    <input type="date" name="tanggal_reservasi" id="tanggal_reservasi" readonly />
+
+    <button type="submit">Kirim Reservasi</button>
+</form>
         </section>
     </main>
 
@@ -204,6 +208,7 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
     const tanggalSelesai = document.getElementById('tanggal_selesai');
     const durasi = document.getElementById('durasi');
     const totalHarga = document.getElementById('total_harga');
+    const quantity = document.getElementById('quantity');
     const hargaProduk = <?php echo $harga; ?>; // Mengambil harga produk dari PHP
     const tanggalReservasi = document.getElementById('tanggal_reservasi');
 
@@ -219,13 +224,13 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
         if (!isNaN(diffDays) && diffDays > 0) {
             durasi.value = diffDays; // Durasi dalam hari, jangan ditambah 1
 
-            // Menghitung total harga
-            let hargaTotal = hargaProduk * diffDays;
+            // Menghitung total harga berdasarkan durasi dan quantity
+            let hargaTotal = hargaProduk * diffDays * quantity.value;
             // Format total harga dalam angka tanpa simbol 'Rp'
             totalHarga.value = hargaTotal.toLocaleString('id-ID'); 
         } else {
             durasi.value = 1; // Default durasi 1 hari jika ada kesalahan
-            totalHarga.value = hargaProduk.toLocaleString('id-ID'); // Total harga 1 hari
+            totalHarga.value = (hargaProduk * quantity.value).toLocaleString('id-ID'); // Total harga 1 hari
         }
     }
 
@@ -233,9 +238,10 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
     const today = new Date().toISOString().split('T')[0];
     tanggalReservasi.value = today;
 
-    // Tambahkan event listener pada perubahan tanggal
+    // Event listeners untuk menghitung durasi dan total harga saat tanggal mulai atau selesai diubah
     tanggalMulai.addEventListener('change', hitungDurasiDanHarga);
     tanggalSelesai.addEventListener('change', hitungDurasiDanHarga);
+    quantity.addEventListener('input', hitungDurasiDanHarga);
 </script>
 
 

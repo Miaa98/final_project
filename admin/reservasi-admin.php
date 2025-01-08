@@ -19,7 +19,8 @@ if (isset($_SESSION['user_id'])) {
                 MAX(r.tanggal_mulai) AS tanggal_mulai, 
                 MAX(r.tanggal_selesai) AS tanggal_selesai, 
                 MAX(r.status) AS status,
-                MAX(u.phone) AS no_telepon
+                MAX(u.phone) AS no_telepon,
+                MAX(r.quantity) AS quantity
         FROM reservations r
         JOIN users u ON r.user_id = u.user_id
         GROUP BY r.kode_reservasi"; // Mengelompokkan berdasarkan kode_reservasi

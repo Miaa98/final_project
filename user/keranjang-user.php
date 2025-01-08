@@ -18,7 +18,7 @@ if (!$user_id) {
 
 // Query untuk mengambil data chart berdasarkan user_id
 $sql = "
-    SELECT c.keranjang_id, p.product_id, p.nama, p.harga, c.tanggal_mulai, c.tanggal_selesai, c.durasi, c.total_harga, c.tanggal_reservasi
+    SELECT c.keranjang_id, p.product_id, p.nama, p.harga, c.tanggal_mulai, c.tanggal_selesai, c.durasi, c.total_harga, c.tanggal_reservasi, c.quantity
     FROM charts c
     JOIN products p ON c.id_produk = p.product_id
     WHERE c.user_id = ?";  // Menambahkan filter berdasarkan user_id
@@ -54,14 +54,15 @@ if (isset($_GET['delete_id'])) {
 ?>
 
 <?php
+// Proses Checkout
 if (isset($_POST['checkout'])) {
     // Generate kode_reservasi unik
     $kode_reservasi = 'R' . date('YmdHis') . $user_id;
 
     // Query untuk memindahkan data dari charts ke reservations dengan kode_reservasi
     $insert_sql = "
-        INSERT INTO reservations (user_id, id_produk, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, kode_reservasi)
-        SELECT user_id, id_produk, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, ? 
+        INSERT INTO reservations (user_id, id_produk, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, kode_reservasi, quantity)
+        SELECT user_id, id_produk, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, ?, quantity 
         FROM charts 
         WHERE user_id = ?";
 
@@ -85,9 +86,8 @@ if (isset($_POST['checkout'])) {
 }
 ?>
 
-
 <!-- Tampilan HTML -->
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -97,48 +97,47 @@ if (isset($_POST['checkout'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-    /* CSS untuk memastikan ikon dan teks berada berdekatan */
-    .btn {
-        margin-right: 10px !important; /* Memberikan jarak 10px */
-    }
+        .btn {
+            margin-right: 10px !important;
+        }
 
-    .btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .btn-primary,
-    .btn-success {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
+        .btn-primary,
+        .btn-success {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
 
-    .d-flex {
-        margin-left: 3px !important;
-        justify-content: left;
-        width: 100%;
-    }
+        .d-flex {
+            margin-left: 3px !important;
+            justify-content: left;
+            width: 100%;
+        }
 
-    .btn+.btn {
-        margin-left: 5px;
-    }
+        .btn+.btn {
+            margin-left: 5px;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 10px !important;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px !important;
+        }
 
-    .harga-total {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
+        .harga-total {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
 
-    .harga-total span.rp {
-        margin-right: 8px;
-    }
-</style>
+        .harga-total span.rp {
+            margin-right: 8px;
+        }
+    </style>
 
 </head>
 
@@ -162,31 +161,30 @@ if (isset($_POST['checkout'])) {
             </thead>
             <tbody>
                 <?php
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        // Hitung total harga berdasarkan harga produk dan durasi
-        $total_harga = $row['harga'] * $row['durasi'];
-        $totalHargaSemua += $total_harga; // Tambahkan ke total harga semua produk
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Menghitung total harga produk berdasarkan durasi dan quantity
+                        $total_harga_item = $row['harga'] * $row['quantity'] * $row['durasi'];
+                        $totalHargaSemua += $total_harga_item;
 
-        echo "<tr>
-            <td>" . htmlspecialchars($row['nama']) . "</td>
-            <td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>
-            <td>" . htmlspecialchars($row['tanggal_mulai']) . "</td>
-            <td>" . htmlspecialchars($row['tanggal_selesai']) . "</td>
-            <td>" . htmlspecialchars($row['durasi']) . "</td>
-            <td>Rp " . number_format($total_harga, 0, ',', '.') . "</td> <!-- Menampilkan total harga yang sudah dihitung -->
-            <td>
-                <a href='?delete_id=" . $row['keranjang_id'] . "' class='btn btn-danger btn-sm'>
-                    <i class='fas fa-trash'></i>
-                </a>
-            </td>
-        </tr>";
-    }
-} else {
-    echo "<tr><td colspan='7'>Tidak ada data chart.</td></tr>";
-}
-?>
-
+                        echo "<tr>
+                            <td>" . htmlspecialchars($row['nama']) . "</td>
+                            <td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>
+                            <td>" . htmlspecialchars($row['tanggal_mulai']) . "</td>
+                            <td>" . htmlspecialchars($row['tanggal_selesai']) . "</td>
+                            <td>" . htmlspecialchars($row['durasi']) . "</td>
+                            <td>Rp " . number_format($total_harga_item, 0, ',', '.') . "</td>
+                            <td>
+                                <a href='?delete_id=" . $row['keranjang_id'] . "' class='btn btn-danger btn-sm'>
+                                    <i class='fas fa-trash'></i>
+                                </a>
+                            </td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>Tidak ada data chart.</td></tr>";
+                }
+                ?>
             </tbody>
         </table>
 
