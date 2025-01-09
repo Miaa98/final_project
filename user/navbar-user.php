@@ -134,7 +134,7 @@
                         <a class="nav-link mx-lg-2" href="gallery-user.php">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-lg-2" href="Contact-user.php">Contact</a>
+                        <a class="nav-link mx-lg-2" href="contact-user.php">Contact</a>
                     </li>
                 </ul>
             </div>
