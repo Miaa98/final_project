@@ -76,7 +76,7 @@ if (isset($_POST['checkout'])) {
         $stmt_delete->bind_param("i", $user_id);
 
         if ($stmt_delete->execute()) {
-            echo "<script>alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi \n\nSilahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan dan pembayaran.'); window.location.href='dashboard-user.php';</script>";
+            echo "<script>alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi \n\nSilahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan pembayaran.'); window.location.href='dashboard-user.php';</script>";
         } else {
             echo "<script>alert('Gagal menghapus data dari keranjang.');</script>";
         }

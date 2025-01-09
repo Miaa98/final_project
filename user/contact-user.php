@@ -274,8 +274,7 @@
   <section id="contact" class="contact">
     <h2><span>Kontak</span> Kami</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus,
-      modi!
+      Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi kami.
     </p>
 
     <div class="row">

@@ -141,6 +141,10 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
             width: 100%;
             box-sizing: border-box;
         }
+
+        .text-danger {
+            color: red;
+        }
     </style>
 </head>
 
@@ -153,9 +157,9 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
             </header>
 
             <!-- Menampilkan user_id pada halaman -->
-<div class="container">
+<!-- <div class="container">
     <h3>User ID yang sedang login: <?php echo htmlspecialchars($user_id); ?></h3>
-</div>
+</div> -->
 
 
             <div class="product-info">
@@ -174,19 +178,19 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>" />
 
     <!-- Tanggal Mulai Sewa -->
-    <label for="tanggal_mulai">Tanggal Mulai Sewa:</label>
+    <label for="tanggal_mulai">Tanggal Mulai Sewa <span class="text-danger">*</span></label>
     <input type="date" name="tanggal_mulai" id="tanggal_mulai" required />
 
     <!-- Tanggal Selesai Sewa -->
-    <label for="tanggal_selesai">Tanggal Selesai Sewa:</label>
+    <label for="tanggal_selesai">Tanggal Selesai Sewa <span class="text-danger">*</span></label>
     <input type="date" name="tanggal_selesai" id="tanggal_selesai" required />
 
     <!-- Durasi Sewa -->
-    <label for="durasi">Durasi Sewa (hari):</label>
-    <input type="number" name="durasi" id="durasi" min="1" readonly />
+    <label for="durasi">Durasi Sewa (hari) <span class="text-danger">*</span></label>
+    <input type="number" name="durasi" id="durasi" min="1" style="background-color: #d4d4d4;" readonly />
 
     <!-- Quantity (Jumlah Produk yang Dipesan) -->
-    <label for="quantity">Jumlah Produk (Qty):</label>
+    <label for="quantity">Jumlah Produk (Qty) <span class="text-danger">*</span></label>
     <input type="number" name="quantity" id="quantity" min="1" required />
 
     <!-- Total Harga -->
