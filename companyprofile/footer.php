@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer Example</title>
-    
+
     <!-- Link ke Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    
+
     <!-- Your CSS link here (optional) -->
     <style>
         /* Style untuk footer */
@@ -116,6 +117,7 @@
         }
     </style>
 </head>
+
 <body>
     <footer class="footer">
         <div class="footer-container">
@@ -146,16 +148,16 @@
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="mailto:contact@hasogi.com">contact@hasogi.com</a></li>
-                    <li><a href="tel:+628123456789">+62 812-3456-789</a></li>
-                    <li><a href="https://goo.gl/maps/abc123">Alamat Kami</a></li>
+                    <li><a href="https://wa.me/6289509828209?text=Halo%20Hasogi%20Show%20Love" target="_blank">0895 0982 8209</a></li>
+                    <li><a href="https://maps.app.goo.gl/HmXL2Kdkw9mL7nCc6">Alamat Kami</a></li>
                 </ul>
-                
+
             </div>
-            
+
             <!-- Kolom 4: Contact -->
             <div class="footer-col-6 col-lg-2 mb-3">
                 <div class="social-icons">
-                <h4>Follow Us</h4>
+                    <h4>Follow Us</h4>
                     <a href="https://www.instagram.com/hsl_sewakebaya" target="_blank" aria-label="Instagram">
                         <i class="bi bi-instagram social-icon"></i>
                     </a>
@@ -175,4 +177,5 @@
         </div>
     </footer>
 </body>
+
 </html>

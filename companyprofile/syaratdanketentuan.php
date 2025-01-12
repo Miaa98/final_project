@@ -104,16 +104,6 @@
     <?php include 'navbar.php'; ?>
     <!-- Navbar End -->
 
-    <!-- Modal Login -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Login Sebagai</h2>
-            <button id="userButton">User</button>
-            <button id="adminButton">Admin</button>
-        </div>
-    </div>
-
     <div class="container">
         <h1>Persyaratan dan Ketentuan Penyewaan Kebaya dan Aksesoris</h1>
         <h2>1. Persyaratan Umum</h2>

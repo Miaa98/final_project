@@ -36,7 +36,7 @@
       /* Memberikan ruang di atas konten untuk navbar */
       font-size: small;
     }
-    
+
     /* Servis Section Styles */
     .servis {
       background: #fff;
@@ -163,29 +163,19 @@
       .row {
         flex-direction: column;
       }
-    } 
+    }
 
-      .about-img {
-        margin-right: 0;
-        margin-bottom: 1rem;
-      }
+    .about-img {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 
 <body>
   <!-- Navbar Start -->
-<?php include 'navbar.php'; ?>
+  <?php include 'navbar.php'; ?>
   <!-- Navbar End -->
-
-  <!-- Modal Login -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Login Sebagai</h2>
-      <button id="userButton">User</button>
-      <button id="adminButton">Admin</button>
-    </div>
-  </div>
 
 
   <!-- About section start -->
@@ -199,9 +189,7 @@
       <div class="content" data-aos="fade-right" data-aos-duration="1000">
         <h3>Selamat Datang di <span>Hasogi Show Love.</span></h3>
         <p>
-          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
-          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
-          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+          Hasogi Show Love berdiri pada tanggal 25 November 2023 sebagai jasa penyewaan kebaya yang mengutamakan kualitas dan keindahan. Bertujuan untuk membuat momen spesial Anda semakin tak terlupakan, Hasogi Show Love menawarkan pengalaman menakjubkan dengan kebaya terbaik yang dirancang dengan perhatian cermat terhadap detail. Kami mengutamakan nilai-nilai cinta dan kebersamaan dan berusaha memberikan layanan terbaik untuk menghadirkan kegembiraan bagi semua klien kami di semua acara penting dalam hidup.
         </p>
       </div>
     </div>
@@ -216,68 +204,14 @@
       <div class="content" data-aos="fade-right" data-aos-duration="1000">
         <h3>Cerita di Balik nama Hasogi</h3>
         <p>
-          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
-          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
-          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- About section 3 -->
-  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
-    <div class="row">
-      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
-      </div>
-      <div class="content" data-aos="fade-right" data-aos-duration="1000">
-        <h3>Cerita di Balik nama Hasogi</h3>
-        <p>
-          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
-          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
-          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
-        </p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- About section 4 -->
-  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
-    <div class="row">
-      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
-      </div>
-      <div class="content" data-aos="fade-right" data-aos-duration="1000">
-        <h3>Cerita di Balik nama Hasogi</h3>
-        <p>
-          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
-          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
-          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- About section 5 -->
-  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
-    <div class="row">
-      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
-      </div>
-      <div class="content" data-aos="fade-right" data-aos-duration="1000">
-        <h3>Cerita di Balik nama Hasogi</h3>
-        <p>
-          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
-          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
-          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+          Tujuan berdirinya "Hasogi" yaitu untuk menunjukkan rasa hormat dan cinta kepada keluarga. Nama "Hasogi" merupakan singkatan dari nama orang tua dan adik pendiri, mencerminkan nilai - nilai kebersamaan, cinta kasih, dan pengabdian yang mendalam dalam perusahaan.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Footer start -->
-<?php include 'footer.php'; ?>
+  <?php include 'footer.php'; ?>
 
   <!--Feather Icon-->
   <script>

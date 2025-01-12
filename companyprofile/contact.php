@@ -253,29 +253,11 @@
   <?php include 'navbar.php'; ?>
   <!-- Navbar End -->
 
-  <!-- Modal Login -->
-  <div id="login-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Login</h2>
-      <form id="login-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <button type="submit">Login</button>
-      </form>
-      <p>Belum punya akun? <a href="register.php" id="register-link">Buat akun di sini</a></p>
-    </div>
-  </div>
-
-
   <!--Contact Section start-->
   <section id="contact" class="contact">
     <h2><span>Kontak</span> Kami</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus,
-      modi!
+      Silahkan hubungi kami melalui kontak dibawah ini atau kunjungi toko kami langsung.
     </p>
 
     <div class="row">

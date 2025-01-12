@@ -49,13 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$stmt_update_stock->execute()) {
             die("Error: Gagal mengurangi stok produk.");
         }
-
         // Simpan data reservasi ke tabel charts
         $sql_insert_reservasi = "INSERT INTO charts (id_produk, user_id, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, quantity) 
-                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt_insert_reservasi = $conn->prepare($sql_insert_reservasi);
         $stmt_insert_reservasi->bind_param("iisssisi", $id_produk, $user_id, $tanggal_mulai, $tanggal_selesai, $durasi, $total_harga, $tanggal_reservasi, $quantity);
-
         if ($stmt_insert_reservasi->execute()) {
             // Redirect ke halaman sukses setelah data berhasil disimpan
             header("Location: keranjang-user.php?status=success");

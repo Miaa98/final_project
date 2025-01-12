@@ -58,7 +58,6 @@ if (isset($_GET['delete_id'])) {
 if (isset($_POST['checkout'])) {
     // Generate kode_reservasi unik
     $kode_reservasi = 'R' . date('YmdHis') . $user_id;
-
     // Query untuk memindahkan data dari charts ke reservations dengan kode_reservasi
     $insert_sql = "
         INSERT INTO reservations (user_id, id_produk, tanggal_mulai, tanggal_selesai, durasi, total_harga, tanggal_reservasi, kode_reservasi, quantity)
@@ -74,17 +73,26 @@ if (isset($_POST['checkout'])) {
         $delete_sql = "DELETE FROM charts WHERE user_id = ?";
         $stmt_delete = $conn->prepare($delete_sql);
         $stmt_delete->bind_param("i", $user_id);
-
+    
         if ($stmt_delete->execute()) {
-            echo "<script>alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi \n\nSilahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan pembayaran.'); window.location.href='dashboard-user.php';</script>";
+            echo "<script>
+                    alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi Silahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan pembayaran.');
+                    window.location.href = 'http://localhost/final_projek3/user/keranjang-user.php'; // Redirect ke halaman keranjang
+                  </script>";
         } else {
-            echo "<script>alert('Gagal menghapus data dari keranjang.');</script>";
+            echo "<script>
+                    alert('Gagal menghapus data dari keranjang.');
+                    window.location.href = 'http://localhost/final_projek3/user/keranjang-user.php'; // Redirect ke halaman keranjang
+                  </script>";
         }
     } else {
-        echo "<script>alert('Gagal melakukan checkout.');</script>";
+        echo "<script>
+                alert('Gagal melakukan checkout.');
+                window.location.href = 'http://localhost/final_projek3/user/keranjang-user.php'; // Redirect ke halaman keranjang
+              </script>";
     }
 }
-?>
+?> 
 
 <!-- Tampilan HTML -->
 <!DOCTYPE html>

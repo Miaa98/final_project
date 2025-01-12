@@ -1,7 +1,6 @@
 <?php
 session_start(); // Mulai sesi
- include '../database/db.php'; ?>
-
+include '../database/db.php'; ?>
 
 <?php
 // Ambil data dari URL query string
@@ -11,6 +10,23 @@ $harga = isset($_GET['harga']) ? $_GET['harga'] : '';
 
 $user_id = isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : '';
 
+// Query untuk mendapatkan tanggal-tanggal di mana stok produk habis
+$sql = "SELECT r.tanggal_mulai, r.tanggal_selesai 
+        FROM reservations r
+        JOIN products p ON r.id_produk = p.product_id
+        WHERE r.id_produk = ? AND p.stock = 0";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$disabled_dates = [];
+while ($row = $result->fetch_assoc()) {
+    $disabled_dates[] = [
+        'start' => $row['tanggal_mulai'],
+        'end' => $row['tanggal_selesai']
+    ];
+}
 
 // Jika data tidak ada, redirect ke halaman yang tepat (misalnya ke halaman produk)
 if (!$id || !$nama || !$harga) {
@@ -32,7 +48,10 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Reservasi</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
+        /* Style yang ada tetap sama */
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f4f4f9;
@@ -142,6 +161,12 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
             box-sizing: border-box;
         }
 
+        input[type="date"]:disabled {
+            background-color: #ccc;
+            /* Warna abu-abu */
+            cursor: not-allowed;
+        }
+
         .text-danger {
             color: red;
         }
@@ -157,10 +182,9 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
             </header>
 
             <!-- Menampilkan user_id pada halaman -->
-<!-- <div class="container">
-    <h3>User ID yang sedang login: <?php echo htmlspecialchars($user_id); ?></h3>
-</div> -->
-
+            <div class="container">
+                <!-- <h3>User ID yang sedang login: <?php echo htmlspecialchars($user_id); ?></h3> -->
+            </div>
 
             <div class="product-info">
                 <h2>Informasi Produk</h2>
@@ -168,87 +192,101 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
                 <p><strong>Harga:</strong> <span class="harga">Rp <?php echo number_format($harga, 0, ',', '.'); ?></span></p>
             </div>
 
-
             <h3>Isi Form Reservasi</h3>
             <form action="../user/reservasi-user.php" method="POST">
-    <!-- Data produk yang dikirim secara hidden -->
-    <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>" />
-    <input type="hidden" name="nama" value="<?php echo htmlspecialchars($nama); ?>" />
-    <input type="hidden" name="harga" value="<?php echo htmlspecialchars($harga); ?>" />
-    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>" />
+                <!-- Data produk yang dikirim secara hidden -->
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>" />
+                <input type="hidden" name="nama" value="<?php echo htmlspecialchars($nama); ?>" />
+                <input type="hidden" name="harga" value="<?php echo htmlspecialchars($harga); ?>" />
+                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>" />
 
-    <!-- Tanggal Mulai Sewa -->
-    <label for="tanggal_mulai">Tanggal Mulai Sewa <span class="text-danger">*</span></label>
-    <input type="date" name="tanggal_mulai" id="tanggal_mulai" required />
+                <!-- Tanggal Mulai Sewa -->
+                <label for="tanggal_mulai">Tanggal Mulai Sewa <span class="text-danger">*</span></label>
+                <input type="text" name="tanggal_mulai" id="tanggal_mulai" required>
 
-    <!-- Tanggal Selesai Sewa -->
-    <label for="tanggal_selesai">Tanggal Selesai Sewa <span class="text-danger">*</span></label>
-    <input type="date" name="tanggal_selesai" id="tanggal_selesai" required />
+                <!-- Tanggal Selesai Sewa -->
+                <label for="tanggal_selesai">Tanggal Selesai Sewa <span class="text-danger">*</span></label>
+                <input type="text" name="tanggal_selesai" id="tanggal_selesai" required>
 
-    <!-- Durasi Sewa -->
-    <label for="durasi">Durasi Sewa (hari) <span class="text-danger">*</span></label>
-    <input type="number" name="durasi" id="durasi" min="1" style="background-color: #d4d4d4;" readonly />
+                <!-- Durasi Sewa -->
+                <label for="durasi">Durasi Sewa (hari)</label>
+                <input type="number" name="durasi" id="durasi" min="1" style="background-color: #d4d4d4 ;" readonly />
 
-    <!-- Quantity (Jumlah Produk yang Dipesan) -->
-    <label for="quantity">Jumlah Produk (Qty) <span class="text-danger">*</span></label>
-    <input type="number" name="quantity" id="quantity" min="1" required />
+                <!-- Quantity (Jumlah Produk yang Dipesan) -->
+                <label for="quantity">Jumlah Produk (Qty) <span class="text-danger">*</span></label>
+                <input type="number" name="quantity" id="quantity" min="1" required />
 
-    <!-- Total Harga -->
-    <label for="total_harga">Total Harga:</label>
-    <input type="text" name="total_harga" id="total_harga" readonly class="harga" value="Rp 0" />
+                <!-- Total Harga -->
+                <label for="total_harga">Total Harga</label>
+                <input type="text" name="total_harga" id="total_harga" readonly class="harga" value="Rp 0" style="background-color: #d4d4d4 ;" />
 
-    <!-- Tanggal Reservasi (otomatis terisi dengan tanggal hari ini) -->
-    <label for="tanggal_reservasi">Tanggal Reservasi:</label>
-    <input type="date" name="tanggal_reservasi" id="tanggal_reservasi" readonly />
+                <!-- Tanggal Reservasi (otomatis terisi dengan tanggal hari ini) -->
+                <label for="tanggal_reservasi">Tanggal Reservasi</label>
+                <input type="date" name="tanggal_reservasi" id="tanggal_reservasi" style="background-color: #d4d4d4 ;" readonly />
 
-    <button type="submit">Kirim Reservasi</button>
-</form>
+                <button type="submit">Kirim Reservasi</button>
+            </form>
         </section>
     </main>
 
     <script>
-    // Ambil elemen input yang relevan
-    const tanggalMulai = document.getElementById('tanggal_mulai');
-    const tanggalSelesai = document.getElementById('tanggal_selesai');
-    const durasi = document.getElementById('durasi');
-    const totalHarga = document.getElementById('total_harga');
-    const quantity = document.getElementById('quantity');
-    const hargaProduk = <?php echo $harga; ?>; // Mengambil harga produk dari PHP
-    const tanggalReservasi = document.getElementById('tanggal_reservasi');
+        // Ambil elemen input yang relevan
+        const tanggalMulai = document.getElementById('tanggal_mulai');
+        const tanggalSelesai = document.getElementById('tanggal_selesai');
+        const disabledDates = <?php echo json_encode($disabled_dates); ?>;
+        const durasi = document.getElementById('durasi');
+        const totalHarga = document.getElementById('total_harga');
+        const quantity = document.getElementById('quantity');
+        const hargaProduk = <?php echo $harga; ?>;
+        const tanggalReservasi = document.getElementById('tanggal_reservasi');
 
-    // Fungsi untuk menghitung durasi sewa dan total harga
-    function hitungDurasiDanHarga() {
-        const mulai = new Date(tanggalMulai.value);
-        const selesai = new Date(tanggalSelesai.value);
+        // Set nilai minimum (tanggal hari ini) untuk input tanggal
+        const today = new Date().toISOString().split('T')[0];
+        tanggalReservasi.value = today;
 
-        // Hitung selisih hari
-        const diffTime = selesai - mulai;
-        const diffDays = diffTime / (1000 * 3600 * 24);
+        // Fungsi untuk menghitung durasi sewa dan total harga
+        function hitungDurasiDanHarga() {
+            const mulai = new Date(tanggalMulai.value.split("-").reverse().join("-"));
+            const selesai = new Date(tanggalSelesai.value.split("-").reverse().join("-"));
 
-        if (!isNaN(diffDays) && diffDays > 0) {
-            durasi.value = diffDays; // Durasi dalam hari, jangan ditambah 1
+            const diffTime = selesai - mulai;
+            const diffDays = diffTime / (1000 * 3600 * 24);
 
-            // Menghitung total harga berdasarkan durasi dan quantity
-            let hargaTotal = hargaProduk * diffDays * quantity.value;
-            // Format total harga dalam angka tanpa simbol 'Rp'
-            totalHarga.value = hargaTotal.toLocaleString('id-ID'); 
-        } else {
-            durasi.value = 1; // Default durasi 1 hari jika ada kesalahan
-            totalHarga.value = (hargaProduk * quantity.value).toLocaleString('id-ID'); // Total harga 1 hari
+            if (!isNaN(diffDays) && diffDays > 0) {
+                durasi.value = diffDays;
+                let hargaTotal = hargaProduk * diffDays * quantity.value;
+                totalHarga.value = hargaTotal.toLocaleString('id-ID');
+            } else {
+                durasi.value = 1;
+                totalHarga.value = (hargaProduk * quantity.value).toLocaleString('id-ID');
+            }
         }
-    }
 
-    // Set Tanggal Reservasi otomatis berdasarkan tanggal hari ini
-    const today = new Date().toISOString().split('T')[0];
-    tanggalReservasi.value = today;
+        flatpickr(tanggalMulai, {
+            minDate: "today",
+            disable: disabledDates.map(range => ({
+                from: range.start,
+                to: range.end
+            })),
+            dateFormat: "d-m-Y", // Mengubah format tanggal menjadi d-m-Y
+            onChange: function(selectedDates, dateStr) {
+                tanggalSelesai._flatpickr.set("minDate", dateStr);
+            }
+        });
 
-    // Event listeners untuk menghitung durasi dan total harga saat tanggal mulai atau selesai diubah
-    tanggalMulai.addEventListener('change', hitungDurasiDanHarga);
-    tanggalSelesai.addEventListener('change', hitungDurasiDanHarga);
-    quantity.addEventListener('input', hitungDurasiDanHarga);
-</script>
+        flatpickr(tanggalSelesai, {
+            minDate: "today",
+            disable: disabledDates.map(range => ({
+                from: range.start,
+                to: range.end
+            })),
+            dateFormat: "d-m-Y" // Mengubah format tanggal menjadi d-m-Y
+        });
 
-
+        tanggalMulai.addEventListener('change', hitungDurasiDanHarga);
+        tanggalSelesai.addEventListener('change', hitungDurasiDanHarga);
+        quantity.addEventListener('input', hitungDurasiDanHarga);
+    </script>
 
 </body>
 

@@ -50,7 +50,7 @@ mysqli_close($conn);
     <title>Login</title>
     <style>
         body {
-            background: url("../img/35.png");
+            background: url("../logo/logo_hsl.jpeg");
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;

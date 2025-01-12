@@ -138,7 +138,9 @@ if (!empty($kode_reservasi)) {
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Selesai</th>
                     <th>Durasi (Hari)</th>
+                    <th>Qty</th>
                     <th>Harga</th>
+                    <th>Total Harga</th>
                 </tr>
             </thead>
             <tbody>
@@ -148,7 +150,7 @@ if (!empty($kode_reservasi)) {
 
                 // Query untuk mengambil data produk terkait reservasi berdasarkan kode_reservasi
                 if (isset($row)) {
-                    $query_produk = "SELECT p.product_id, p.nama, p.harga, r.tanggal_mulai, r.tanggal_selesai, DATEDIFF(r.tanggal_selesai, r.tanggal_mulai) AS durasi 
+                    $query_produk = "SELECT p.product_id, p.nama, p.harga, r.quantity, r.tanggal_mulai, r.tanggal_selesai, DATEDIFF(r.tanggal_selesai, r.tanggal_mulai) AS durasi 
                              FROM reservations r 
                              JOIN products p ON r.id_produk = p.product_id 
                              WHERE r.kode_reservasi = ?";
@@ -167,11 +169,13 @@ if (!empty($kode_reservasi)) {
                             echo "<td>" . date("d M Y", strtotime($produk['tanggal_mulai'])) . "</td>";
                             echo "<td>" . date("d M Y", strtotime($produk['tanggal_selesai'])) . "</td>";
                             echo "<td>" . htmlspecialchars($produk['durasi'] ?? '') . " hari</td>";
+                            echo "<td>" . htmlspecialchars($produk['quantity'] ?? '') . "</td>";
                             echo "<td>Rp " . number_format($produk['harga'], 0, ',', '.') . "</td>";
+                            echo "<td>Rp " . number_format($produk['harga'] * $produk['quantity'], 0, ',', '.') . "</td>";
                             echo "</tr>";
 
                             // Tambahkan harga ke total
-                            $total_harga += $produk['harga'];
+                            $total_harga += ($produk['harga'] * $produk['quantity']); 
                         }
                     } else {
                         echo "<tr><td colspan='7'>Tidak ada data produk terkait reservasi ini.</td></tr>";
@@ -183,7 +187,7 @@ if (!empty($kode_reservasi)) {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" style="text-align: right;"><strong>Total Harga :</strong></td>
+                    <td colspan="8" style="text-align: right;"><strong>Total Harga :</strong></td>
                     <td><strong>Rp <?php echo number_format($total_harga, 0, ',', '.'); ?></strong></td>
                 </tr>
             </tfoot>

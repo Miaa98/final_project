@@ -132,11 +132,11 @@
         max-width: 250px;
         /* Mengatur lebar maksimum item */
         padding: 10px;
-    border-radius: 15px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    text-align: center;
+        border-radius: 15px;
+        background-color: #f9f9f9;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        text-align: center;
     }
 
     .categories a:hover {
@@ -344,45 +344,43 @@
         <div class="news-item">
             <h3>Cara Pertama</h3>
             <p>
-                Pilih gaun atau kebaya desainer favoritmu di Hasogi.com.
-                Styleist kami siap membantu untuk memilih gaun/kebaya yang sesuai denganmu.
-                Chat stylist kami di bagian bawah halaman ini.
+                Membuat akun dan masukkan data diri pada form pendaftaran.
+                </br>Anda dapat memilih kebaya yang Anda inginkan.
+                Setelah memilih kebaya, Anda dapat memilih tanggal dan waktu penyewaan dan melakukan checkout.
+
             </p>
         </div>
         <div class="news-item">
             <h3>Cara Kedua</h3>
             <p>
-                Nikmati penampilanmu yang cantik & elegan dengan balutan karya desainer.
-                Jangan lupa untuk berbagi pengalamanmu menggunakan kebaya dan gaun dengan cara
-                menggungah foto di instagram/sosial media mu dan tag @hsl_sewakebaya
+                Silahkan datang ke Gallery dI Jl. Tunggak Jati, Kab. Karawang untuk melakukan pembayaran dan pengambilan barang.
             </p>
         </div>
         <div class="news-item">
             <h3>Cara Ketiga</h3>
             <p>
-                Untuk wilayah Karawang, kurir kami akan mengambil ditempat Anda (menggunakan ongkir).
-                Untuk luar selain itu. Kembalikan ke kami menggunakan jasa kurir lewat aplikasi.
-                Dengan alamat yang telah di sediakan.
+                Setelah cara pertama dan kedua dilakukan, barang sudah dapat digunakan sesuai dengan durasi sewa.
+                </br> Pastikan tidak ada kerusakan setelah Anda menyewa barang yang Anda sewa, jika terdapat kerusakan pada produk tersebut maka akan dikenakan biaya penggantian barang.
             </p>
         </div>
     </section>
     <!-- News section end -->
 
     <!-- Footer start -->
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
     <!-- Footer end -->
 
     <!--Feather Icon-->
     <script>
-    // Mengubah warna navbar saat menggulir
-    window.onscroll = function() {
-      const navbar = document.querySelector('.navbar');
-      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        navbar.style.backgroundColor = "#222"; // Warna saat menggulir
-      } else {
-        navbar.style.backgroundColor = "#333"; // Warna default
-      }
-    };
+        // Mengubah warna navbar saat menggulir
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.style.backgroundColor = "#222"; // Warna saat menggulir
+            } else {
+                navbar.style.backgroundColor = "#333"; // Warna default
+            }
+        };
 
         // Animasi Gambar //
         document.addEventListener("DOMContentLoaded", function() {
