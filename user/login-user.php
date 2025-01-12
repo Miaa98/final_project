@@ -44,13 +44,14 @@ mysqli_close($conn);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
         body {
-            background: url("../logo/logo_hsl.jpeg");
+            background: url("../img/bg.jpg");
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -61,6 +62,7 @@ mysqli_close($conn);
             box-sizing: border-box;
             padding: 20px;
         }
+
         .container {
             background-color: #fff;
             padding: 2rem;
@@ -70,6 +72,7 @@ mysqli_close($conn);
             max-width: 400px;
             text-align: center;
         }
+
         .alert {
             padding: 0.5rem 1rem;
             margin-bottom: 1rem;
@@ -79,20 +82,25 @@ mysqli_close($conn);
             color: #fff;
             text-align: center;
         }
+
         .form-group {
             margin-bottom: 1rem;
             text-align: left;
         }
+
         h2 {
             margin-bottom: 1.5rem;
             color: #000;
         }
+
         label {
             font-weight: bold;
             margin-bottom: 0.5rem;
             display: block;
         }
-        input[type="email"], input[type="password"] {
+
+        input[type="email"],
+        input[type="password"] {
             width: 80%;
             padding: 0.50rem;
             border: 1px solid #333;
@@ -101,6 +109,7 @@ mysqli_close($conn);
             transition: all 0.3s ease;
             margin-bottom: 1.5rem;
         }
+
         button {
             background-color: #333;
             color: #fff;
@@ -111,18 +120,22 @@ mysqli_close($conn);
             font-size: 1rem;
             transition: background 0.3s ease;
         }
+
         button:hover {
             background-color: #fff;
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <h2>Form Login</h2>
 
         <!-- Menampilkan pesan error jika ada -->
-        <?php if (isset($error)) { echo "<div class='alert'>$error</div>"; } ?>
+        <?php if (isset($error)) {
+            echo "<div class='alert'>$error</div>";
+        } ?>
 
         <form action="login-user.php" method="POST">
             <label for="email">Email:</label>
@@ -137,4 +150,5 @@ mysqli_close($conn);
     </div>
 
 </body>
+
 </html>
