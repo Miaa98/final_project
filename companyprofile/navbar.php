@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,10 +50,12 @@
         }
 
         .navbar-logo span {
-    color: #F0A8D0;
-    font-family: 'Great Vibes', cursive; /* Terapkan font Great Vibes */
-    font-size: 24px; /* Sesuaikan ukuran font jika diperlukan */
-}
+            color: #F0A8D0;
+            font-family: 'Great Vibes', cursive;
+            /* Terapkan font Great Vibes */
+            font-size: 24px;
+            /* Sesuaikan ukuran font jika diperlukan */
+        }
 
         .navbar-logo span {
             color: #F0A8D0;
@@ -64,6 +67,11 @@
             text-decoration: none;
             font-size: 24px;
             font-family: "great vibes";
+        }
+
+        .navbar-extra {
+            display: flex;
+            align-items: center;
         }
 
         .navbar-extra a {
@@ -80,6 +88,8 @@
             border-color: #ffcc00;
             color: #333;
         }
+
+
 
         #login-button {
             background-color: #fff;
@@ -98,18 +108,26 @@
         /* Responsive Styles */
         @media (max-width: 768px) {
             .navbar-nav {
-                display: flex;
-                flex-direction: row;
-                position: absolute;
-                background-color: #333;
-                width: 100%;
-                top: 60px;
-                left: 0;
-                z-index: 10;
-                align-items: center;
-                justify-content: center;
                 display: none;
+                /* Sembunyikan navbar-nav secara default */
+                flex-direction: column;
+                /* Atur agar item ditampilkan secara vertikal */
+                position: absolute;
+                /* Agar navbar tidak mempengaruhi layout */
+                background-color: #524A4E;
+                /* Warna latar belakang navbar */
+                width: 100%;
+                /* Lebar penuh */
+                top: 60px;
+                /* Sesuaikan dengan tinggi navbar */
+                left: 0;
+                /* Posisi kiri */
+                z-index: 10;
+                /* Pastikan di atas elemen lain */
+                align-items: center;
+                /* Pusatkan item di navbar */
             }
+
 
             .navbar {
                 flex-direction: column;
@@ -120,11 +138,21 @@
             }
 
             .navbar-extra {
-                display: flex;
+                display: block;
             }
 
             .navbar-extra a {
                 margin-left: 0.5rem;
+                padding: 10px 15px;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+
+            .navbar-extra a:hover {
+                background-color: #ffcc00;
+                border-color: #ffcc00;
+                color: #333;
             }
         }
 
@@ -135,11 +163,12 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar Start -->
     <nav class="navbar">
-    <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</a>
+        <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</a>
 
         <div class="me-0">
             <div class="navbar-nav">
@@ -151,9 +180,9 @@
                 <a href="contact.php">Contact Service</a>
                 <a href="../user/login-user.php" id="login-button">Login</a>
             </div>
-        </div>
-        <div class="navbar-extra">
-            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+            <div class="navbar-extra">
+                <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+            </div>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -162,11 +191,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         feather.replace();
-
-        // Toggle navbar on hamburger click (mobile view)
-        document.getElementById('hamburger-menu').addEventListener('click', function() {
-            document.querySelector('.navbar-nav').classList.toggle('active');
-        });
+        // Toggle Navbar-Nav pada layar kecil
+        document.getElementById('hamburger-menu').onclick = function() {
+            const navbarNav = document.querySelector('.navbar-nav');
+            navbarNav.classList.toggle('active'); // Toggle class 'active'
+        };
     </script>
 </body>
+
 </html>
