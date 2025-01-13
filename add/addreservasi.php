@@ -268,7 +268,7 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
                 from: range.start,
                 to: range.end
             })),
-            dateFormat: "d-m-Y", // Mengubah format tanggal menjadi d-m-Y
+            dateFormat: "m-d-Y", // Mengubah format tanggal menjadi m-d-Y
             onChange: function(selectedDates, dateStr) {
                 tanggalSelesai._flatpickr.set("minDate", dateStr);
             }
@@ -280,12 +280,24 @@ $stmt->bind_param("iississ", $id_produk, $user_id, $tanggal_mulai, $tanggal_sele
                 from: range.start,
                 to: range.end
             })),
-            dateFormat: "d-m-Y" // Mengubah format tanggal menjadi d-m-Y
+            dateFormat: "m-d-Y" // Mengubah format tanggal menjadi m-d-Y
         });
 
         tanggalMulai.addEventListener('change', hitungDurasiDanHarga);
         tanggalSelesai.addEventListener('change', hitungDurasiDanHarga);
         quantity.addEventListener('input', hitungDurasiDanHarga);
+
+        // Konversi Tanggal ke Format MySQL sebelum Submit
+        const convertToMySQLDate = (dateStr) => {
+            const [month, day, year] = dateStr.split("-");
+            return `${year}-${month}-${day}`;
+        };
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            // Konversi tanggal mulai dan selesai ke format MySQL
+            tanggalMulai.value = convertToMySQLDate(tanggalMulai.value);
+            tanggalSelesai.value = convertToMySQLDate(tanggalSelesai.value);
+        });
     </script>
 
 </body>

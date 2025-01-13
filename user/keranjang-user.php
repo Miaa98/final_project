@@ -73,7 +73,7 @@ if (isset($_POST['checkout'])) {
         $delete_sql = "DELETE FROM charts WHERE user_id = ?";
         $stmt_delete = $conn->prepare($delete_sql);
         $stmt_delete->bind_param("i", $user_id);
-    
+
         if ($stmt_delete->execute()) {
             echo "<script>
                     alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi Silahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan pembayaran.');
@@ -92,7 +92,7 @@ if (isset($_POST['checkout'])) {
               </script>";
     }
 }
-?> 
+?>
 
 <!-- Tampilan HTML -->
 <!DOCTYPE html>
@@ -178,8 +178,10 @@ if (isset($_POST['checkout'])) {
                         echo "<tr>
                             <td>" . htmlspecialchars($row['nama']) . "</td>
                             <td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>
-                            <td>" . htmlspecialchars($row['tanggal_mulai']) . "</td>
-                            <td>" . htmlspecialchars($row['tanggal_selesai']) . "</td>
+                            <td>" . htmlspecialchars(date('m-d-Y', strtotime($row['tanggal_mulai'])));
+                        echo "</td>
+                            <td>" . htmlspecialchars(date('m-d-Y', strtotime($row['tanggal_selesai'])));
+                        echo "</td>
                             <td>" . htmlspecialchars($row['durasi']) . "</td>
                             <td>Rp " . number_format($total_harga_item, 0, ',', '.') . "</td>
                             <td>

@@ -331,14 +331,12 @@ if (!$result) {
             /* Warna teks untuk keterangan harga sewa */
         }
 
-      
+
 
         h2 {
             text-align: center !important;
             color: black !important;
         }
-
-
     </style>
 </head>
 
@@ -368,7 +366,7 @@ if (!$result) {
                     <h3 class="menu-card-title"><?php echo isset($row['nama']) ? $row['nama'] : 'Nama Tidak Tersedia'; ?></h3>
 
                     <!-- Menampilkan deskripsi produk -->
-                    
+
 
                     <!-- Menampilkan harga produk -->
                     <span class="price-info">Rp <?php echo isset($row['harga']) ? number_format($row['harga'], 0, ',', '.') : '0'; ?></span>
@@ -384,7 +382,7 @@ if (!$result) {
 
 
                     <!-- Menampilkan status produk -->
-                    <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row['stock']) ? $row['stock'] : 'Tidak Tersedia'); ?></span>
+                    <span class="status-info" style="color: green; font-weight: bold;"></span>
 
                     <!-- Tombol untuk booking -->
                     <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../add/addreservasi.php?id=<?php echo urlencode($row['product_id']); ?>&nama=<?php echo urlencode($row['nama']); ?>&harga=<?php echo urlencode($row['harga']); ?>&user_id=<?php echo urlencode($user_id); ?>';">
@@ -415,7 +413,7 @@ if (!$result) {
                         echo $kebaya_id . ' - ' . $product_id;
                         ?>
                     </span>
-                    <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row_jas['stock']) ? $row_jas['stock'] : 'Tidak Tersedia'); ?></span>
+                    <span class="status-info" style="color: green; font-weight: bold;"></span>
                     <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../add/addreservasi.php?id=<?php echo urlencode($row_jas['product_id']); ?>&nama=<?php echo urlencode($row_jas['nama']); ?>&harga=<?php echo urlencode($row_jas['harga']); ?>';">
                         Booking
                     </button>
@@ -444,7 +442,7 @@ if (!$result) {
                         echo $kebaya_id . ' - ' . $product_id;
                         ?>
                     </span>
-                    <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row_aksesoris['stock']) ? $row_aksesoris['stock'] : 'Tidak Tersedia'); ?></span>
+                    <span class="status-info" style="color: green; font-weight: bold;"></span>
                     <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../add/addreservasi.php?id=<?php echo urlencode($row_aksesoris['product_id']); ?>&nama=<?php echo urlencode($row_aksesoris['nama']); ?>&harga=<?php echo urlencode($row_aksesoris['harga']); ?>';">
                         Booking
                     </button>

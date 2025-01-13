@@ -8,7 +8,7 @@
 // // Membuat koneksi
 // $conn = new mysqli($servername, $username, $password, $dbname);
 
-include './database/db.php';
+include '../database/db.php';
 
 // Mengecek koneksi
 if ($conn->connect_error) {
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Menangani upload file gambar
-    $target_dir = "../img/uploads/"; 
+    $target_dir = "../img/uploads/";
     $image_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . $image_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,7 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #fff;
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             text-align: left;
         }
 
@@ -112,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-4">
         <h2>Tambah Produk Kebaya</h2>
@@ -140,4 +143,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </body>
+
 </html>

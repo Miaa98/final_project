@@ -6,7 +6,7 @@ include '../database/db.php'; // Koneksi ke database
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $role = $_SESSION['role'];
-    
+
     // Ambil data reservasi dari database berdasarkan user_id
     $query = "SELECT r.kode_reservasi, 
                  u.username, 
@@ -110,9 +110,9 @@ if (isset($_SESSION['user_id'])) {
                 if (isset($result) && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         // Format tanggal dd mmm yyyy
-                        $tanggal_reservasi = date("d M Y", strtotime($row['tanggal_reservasi']));
-                        $tanggal_mulai = date("d M Y", strtotime($row['tanggal_mulai']));
-                        $tanggal_selesai = date("d M Y", strtotime($row['tanggal_selesai']));
+                        $tanggal_reservasi = date("m D Y", strtotime($row['tanggal_reservasi']));
+                        $tanggal_mulai = date("m D Y", strtotime($row['tanggal_mulai']));
+                        $tanggal_selesai = date("m D Y", strtotime($row['tanggal_selesai']));
 
                         echo "<tr>";
                         echo "<td>" . $no++ . "</td>";

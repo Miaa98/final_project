@@ -52,7 +52,7 @@ mysqli_close($conn);
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background: url("../img/35.png");
+        background: url("../img/bg.jpg");
         display: flex;
         justify-content: center;
         align-items: center;

@@ -26,24 +26,24 @@ if (!$result) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sewa Disini</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sewa Disini</title>
 
-  <!--Fonts-->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <!--Feather Icon-->
-  <script src="https://unpkg.com/feather-icons"></script>
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!--Feather Icon-->
+    <script src="https://unpkg.com/feather-icons"></script>
 
-  <!--Style-->
-  <link rel="stylesheet" href="../css/menu.css" />
+    <!--Style-->
+    <link rel="stylesheet" href="../css/menu.css" />
 </head>
 
 <body>
-  <style>
+    <style>
         * {
             box-sizing: border-box;
             margin: 0;
@@ -312,115 +312,114 @@ if (!$result) {
             /* Warna teks untuk keterangan harga sewa */
         }
 
-      
+
 
         h2 {
             text-align: center !important;
             color: black !important;
         }
-
-
     </style>
-</head>
+    </head>
 
-<body>
-    <!-- NAVBAR -->
-    <?php include 'navbar.php'; ?>
-    <!-- NAVBAR -->
+    <body>
+        <!-- NAVBAR -->
+        <?php include 'navbar.php'; ?>
+        <!-- NAVBAR -->
 
-    <!--Menu Section Start--> 
-    <section id="kebaya" class="menu">
-        <h2><span>Daftar</span> Kebaya</h2>
-        <p>
-            Temukan berbagai jenis kebaya untuk acara spesial Anda.
-        </p>
-        <div class="row">
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-    <div class="menu-card">
-        <img src="<?php echo isset($row['foto']) && !empty($row['foto']) ? '../img/uploads/' . $row['foto'] : 'default-image.jpg'; ?>" alt="Kebaya" class="menu-card-img" />
-        <h3 class="menu-card-title"><?php echo isset($row['nama']) ? $row['nama'] : 'Nama Tidak Tersedia'; ?></h3>
-        <span class="price-info">Rp <?php echo isset($row['harga']) ? number_format($row['harga'], 0, ',', '.') : '0'; ?></span>
-        <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
-            <?php
-            $kebaya_id = isset($row['kebaya_id']) ? $row['kebaya_id'] : 'Kode Tidak Tersedia';
-            $product_id = isset($row['product_id']) ? $row['product_id'] : 'Kode Tidak Tersedia';
-            echo $kebaya_id . ' - ' . $product_id;
-            ?>
-        </span>
-        <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row['stock']) ? $row['stock'] : 'Tidak Tersedia'); ?></span>
-        <!-- Tombol Booking yang Diperbaiki -->
-        <button class="booking-btn" style="margin-top: 10px;" 
-                onclick="window.location.href='../user/login-user.php?id=<?php echo urlencode($row['product_id']); ?>&nama=<?php echo urlencode($row['nama']); ?>&harga=<?php echo urlencode($row['harga']); ?>&user_id=<?php echo isset($user_id) ? urlencode($user_id) : ''; ?>';">
-            Booking
-        </button>
-    </div>
-<?php endwhile; ?>
-        </div>
-    </section>
+        <!--Menu Section Start-->
+        <section id="kebaya" class="menu">
+            <h2><span>Daftar</span> Kebaya</h2>
+            <p>
+                Temukan berbagai jenis kebaya untuk acara spesial Anda.
+            </p>
+            <div class="row">
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="menu-card">
+                        <img src="<?php echo isset($row['foto']) && !empty($row['foto']) ? '../img/uploads/' . $row['foto'] : 'default-image.jpg'; ?>" alt="Kebaya" class="menu-card-img" />
+                        <h3 class="menu-card-title"><?php echo isset($row['nama']) ? $row['nama'] : 'Nama Tidak Tersedia'; ?></h3>
+                        <span class="price-info">Rp <?php echo isset($row['harga']) ? number_format($row['harga'], 0, ',', '.') : '0'; ?></span>
+                        <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
+                            <?php
+                            $kebaya_id = isset($row['kebaya_id']) ? $row['kebaya_id'] : 'Kode Tidak Tersedia';
+                            $product_id = isset($row['product_id']) ? $row['product_id'] : 'Kode Tidak Tersedia';
+                            echo $kebaya_id . ' - ' . $product_id;
+                            ?>
+                        </span>
+                        <span class="status-info" style="color: green; font-weight: bold;"></span>
+                        <!-- Tombol Booking yang Diperbaiki -->
+                        <button class="booking-btn" style="margin-top: 10px;"
+                            onclick="window.location.href='../user/login-user.php?id=<?php echo urlencode($row['product_id']); ?>&nama=<?php echo urlencode($row['nama']); ?>&harga=<?php echo urlencode($row['harga']); ?>&user_id=<?php echo isset($user_id) ? urlencode($user_id) : ''; ?>';">
+                            Booking
+                        </button>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
 
-    <!--Menu Section End-->
+        <!--Menu Section End-->
 
-    <!-- Jas Section -->
-    <section id="jas" class="menu">
-        <h2><span>Daftar</span> Jas</h2>
-        <p>Temukan berbagai jenis jas untuk acara spesial Anda.</p>
-        <div class="row">
-            <?php while ($row_jas = mysqli_fetch_assoc($result_jas)): ?>
-                <div class="menu-card">
-                    <img src="<?php echo isset($row_jas['foto']) ? '../img/uploads/' . $row_jas['foto'] : 'default-image.jpg'; ?>" alt="Jas" class="menu-card-img" />
-                    <h3 class="menu-card-title"><?php echo isset($row_jas['nama']) ? $row_jas['nama'] : 'Nama Tidak Tersedia'; ?></h3>
-                    <p><?php echo isset($row_jas['deskripsi']) ? $row_jas['deskripsi'] : 'Deskripsi Tidak Tersedia'; ?></p>
-                    <span class="price-info">Rp <?php echo isset($row_jas['harga']) ? number_format($row_jas['harga'], 0, ',', '.') : '0'; ?></span>
-                    <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
-                        <?php
-                        $kebaya_id = isset($row_jas['kebaya_id']) ? $row_jas['kebaya_id'] : 'Kode Tidak Tersedia';
-                        $product_id = isset($row_jas['product_id']) ? $row_jas['product_id'] : 'Kode Tidak Tersedia';
-                        echo $kebaya_id . ' - ' . $product_id;
-                        ?>
-                    </span>
-                    <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row_jas['stock']) ? $row_jas['stock'] : 'Tidak Tersedia'); ?></span>
-                    <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../add/addreservasi.php?id=<?php echo urlencode($row_jas['product_id']); ?>&nama=<?php echo urlencode($row_jas['nama']); ?>&harga=<?php echo urlencode($row_jas['harga']); ?>';">
-                        Booking
-                    </button>
+        <!-- Jas Section -->
+        <section id="jas" class="menu">
+            <h2><span>Daftar</span> Jas</h2>
+            <p>Temukan berbagai jenis jas untuk acara spesial Anda.</p>
+            <div class="row">
+                <?php while ($row_jas = mysqli_fetch_assoc($result_jas)): ?>
+                    <div class="menu-card">
+                        <img src="<?php echo isset($row_jas['foto']) ? '../img/uploads/' . $row_jas['foto'] : 'default-image.jpg'; ?>" alt="Jas" class="menu-card-img" />
+                        <h3 class="menu-card-title"><?php echo isset($row_jas['nama']) ? $row_jas['nama'] : 'Nama Tidak Tersedia'; ?></h3>
+                        <p><?php echo isset($row_jas['deskripsi']) ? $row_jas['deskripsi'] : 'Deskripsi Tidak Tersedia'; ?></p>
+                        <span class="price-info">Rp <?php echo isset($row_jas['harga']) ? number_format($row_jas['harga'], 0, ',', '.') : '0'; ?></span>
+                        <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
+                            <?php
+                            $kebaya_id = isset($row_jas['kebaya_id']) ? $row_jas['kebaya_id'] : 'Kode Tidak Tersedia';
+                            $product_id = isset($row_jas['product_id']) ? $row_jas['product_id'] : 'Kode Tidak Tersedia';
+                            echo $kebaya_id . ' - ' . $product_id;
+                            ?>
+                        </span>
+                        <span class="status-info" style="color: green; font-weight: bold;"></span>
+                        <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../user/login-user.php?id=<?php echo urlencode($row_jas['product_id']); ?>&nama=<?php echo urlencode($row_jas['nama']); ?>&harga=<?php echo urlencode($row_jas['harga']); ?>';">
+                            Booking
+                        </button>
 
-                </div>
-            <?php endwhile; ?>
-        </div>
-    </section>
-    <!--Menu Section End for Jas-->
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
+        <!--Menu Section End for Jas-->
 
-    <!-- Aksesoris Section -->
-    <section id="aksesoris" class="menu">
-        <h2><span>Daftar</span> Aksesoris</h2>
-        <p>Temukan berbagai aksesoris untuk melengkapi penampilan Anda.</p>
-        <div class="row">
-            <?php while ($row_aksesoris = mysqli_fetch_assoc($result_aksesoris)): ?>
-                <div class="menu-card">
-                    <img src="<?php echo isset($row_aksesoris['foto']) ? '../img/uploads/' . $row_aksesoris['foto'] : 'default-image.jpg'; ?>" alt="Aksesoris" class="menu-card-img" />
-                    <h3 class="menu-card-title"><?php echo isset($row_aksesoris['nama']) ? $row_aksesoris['nama'] : 'Nama Tidak Tersedia'; ?></h3>
-                    <p><?php echo isset($row_aksesoris['deskripsi']) ? $row_aksesoris['deskripsi'] : 'Deskripsi Tidak Tersedia'; ?></p>
-                    <span class="price-info">Rp <?php echo isset($row_aksesoris['harga']) ? number_format($row_aksesoris['harga'], 0, ',', '.') : '0'; ?></span>
-                    <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
-                        <?php
-                        $kebaya_id = isset($row_aksesoris['kebaya_id']) ? $row_aksesoris['kebaya_id'] : 'Kode Tidak Tersedia';
-                        $product_id = isset($row_aksesoris['product_id']) ? $row_aksesoris['product_id'] : 'Kode Tidak Tersedia';
-                        echo $kebaya_id . ' - ' . $product_id;
-                        ?>
-                    </span>
-                    <span class="status-info" style="color: green; font-weight: bold;"><?php echo 'Stock: ' . (isset($row_aksesoris['stock']) ? $row_aksesoris['stock'] : 'Tidak Tersedia'); ?></span>
-                    <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../add/addreservasi.php?id=<?php echo urlencode($row_aksesoris['product_id']); ?>&nama=<?php echo urlencode($row_aksesoris['nama']); ?>&harga=<?php echo urlencode($row_aksesoris['harga']); ?>';">
-                        Booking
-                    </button>
-                </div>
-            <?php endwhile; ?>
-        </div>
-    </section>
+        <!-- Aksesoris Section -->
+        <section id="aksesoris" class="menu">
+            <h2><span>Daftar</span> Aksesoris</h2>
+            <p>Temukan berbagai aksesoris untuk melengkapi penampilan Anda.</p>
+            <div class="row">
+                <?php while ($row_aksesoris = mysqli_fetch_assoc($result_aksesoris)): ?>
+                    <div class="menu-card">
+                        <img src="<?php echo isset($row_aksesoris['foto']) ? '../img/uploads/' . $row_aksesoris['foto'] : 'default-image.jpg'; ?>" alt="Aksesoris" class="menu-card-img" />
+                        <h3 class="menu-card-title"><?php echo isset($row_aksesoris['nama']) ? $row_aksesoris['nama'] : 'Nama Tidak Tersedia'; ?></h3>
+                        <p><?php echo isset($row_aksesoris['deskripsi']) ? $row_aksesoris['deskripsi'] : 'Deskripsi Tidak Tersedia'; ?></p>
+                        <span class="price-info">Rp <?php echo isset($row_aksesoris['harga']) ? number_format($row_aksesoris['harga'], 0, ',', '.') : '0'; ?></span>
+                        <span class="status-info" style="color: Blue; font-weight: bold; font-size: 0.9em;">
+                            <?php
+                            $kebaya_id = isset($row_aksesoris['kebaya_id']) ? $row_aksesoris['kebaya_id'] : 'Kode Tidak Tersedia';
+                            $product_id = isset($row_aksesoris['product_id']) ? $row_aksesoris['product_id'] : 'Kode Tidak Tersedia';
+                            echo $kebaya_id . ' - ' . $product_id;
+                            ?>
+                        </span>
+                        <span class="status-info" style="color: green; font-weight: bold;"></span>
+                        <button class="booking-btn" style="margin-top: 10px;" onclick="window.location.href = '../user/login-user.php?id=<?php echo urlencode($row_aksesoris['product_id']); ?>&nama=<?php echo urlencode($row_aksesoris['nama']); ?>&harga=<?php echo urlencode($row_aksesoris['harga']); ?>';">
+                            Booking
+                        </button>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
 
-    <script>
-        feather.replace();
-    </script>
-  
-</body>
-<!-- FOOTER -->
- <?php include 'footer.php'; ?>
+        <script>
+            feather.replace();
+        </script>
+
+    </body>
+    <!-- FOOTER -->
+    <?php include 'footer.php'; ?>
+
 </html>

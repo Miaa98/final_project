@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sewa Disini</title>
+    <title>Sewa Kebaya Karawang</title>
 
     <!--Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+
     <!--Feather Icon-->
     <script src="https://unpkg.com/feather-icons"></script>
     <link a href="stylesheet" rel="../css/home.css">
@@ -39,6 +36,7 @@
 
 
     .categories {
+        object-fit: cover;
         margin-top: 20px;
         /* Ruang di atas kategori */
     }
@@ -53,6 +51,10 @@
     }
 
     .categories ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+
         list-style-type: none;
         /* Menghapus bullet points */
         padding: 0;
@@ -305,10 +307,9 @@
         <main class="content" data-aos="fade-up" data-aos-duration="2000">
             <h1>Sewa Kebaya dan Gaun <span>Karawang</span></h1>
             <p>
-                Menyewakan beberapa jenis kebaya & gaun untuk acara pernikahan,
-                wisuda, brithday party, kondangan.
+                Menyewakan beberapa jenis Kebaya & Gaun untuk acara Pernikahan,
+                Wisuda, Brithday Party, dan Kondangan.
             </p>
-            <a href="#" class="cta">Hubungi Kami</a>
         </main>
     </section>
 
@@ -317,20 +318,16 @@
         <h2>Kategori</h2>
         <ul>
             <li>
-                <img src="../img/kebaya pernikahan.jpg" alt="Kebaya Pernikahan" />
+                <img src="../img/aksesoris.jpg" alt="Kebaya Pernikahan" />
                 <a href="produk.php">Kebaya Pernikahan</a>
             </li>
             <li>
-                <img src="../img/kebaya wisuda2.jpg" alt="Gaun Wisuda" />
-                <a href="produk.php">Gaun Wisuda</a>
+                <img src="../img/adat.jpg" alt="Kebaya Adat" />
+                <a href="produk.php">Kebaya Adat</a>
             </li>
             <li>
-                <img src="../img/kebaya tradisional.jpg" alt="Gaun Pesta" />
-                <a href="produk.php">Gaun Pesta</a>
-            </li>
-            <li>
-                <img src="../img/kebaya tradisional.jpg" alt="Kebaya Tradisional" />
-                <a href="produk.php">Kebaya Tradisional</a>
+                <img src="../img/gallery3.jpg" alt="Gaun Resepsi" />
+                <a href="produk.php">Gaun Resepsi</a>
             </li>
         </ul>
     </div>
@@ -375,10 +372,12 @@
         // Mengubah warna navbar saat menggulir
         window.onscroll = function() {
             const navbar = document.querySelector('.navbar');
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                navbar.style.backgroundColor = "#222"; // Warna saat menggulir
-            } else {
-                navbar.style.backgroundColor = "#333"; // Warna default
+            if (navbar) {
+                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                    navbar.style.backgroundColor = "#222"; // Warna saat menggulir
+                } else {
+                    navbar.style.backgroundColor = "#333"; // Warna default
+                }
             }
         };
 
