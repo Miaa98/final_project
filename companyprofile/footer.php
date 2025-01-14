@@ -147,9 +147,9 @@
             <div class="footer-col-6 col-lg-2 mb-3">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="mailto:contact@hasogi.com">contact@hasogi.com</a></li>
+                    <li><a href="mailto:contact@hasogi.com" target="_blank">contact@hasogi.com</a></li>
                     <li><a href="https://wa.me/6289509828209?text=Halo%20Hasogi%20Show%20Love" target="_blank">0895 0982 8209</a></li>
-                    <li><a href="https://maps.app.goo.gl/HmXL2Kdkw9mL7nCc6">Alamat Kami</a></li>
+                    <li><a href="https://maps.app.goo.gl/HmXL2Kdkw9mL7nCc6" target="_blank">Alamat Kami</a></li>
                 </ul>
 
             </div>

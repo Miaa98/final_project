@@ -98,7 +98,7 @@
         /* Mengatur lebar gambar menjadi 100% */
         max-width: 250px;
         /* Mengatur lebar maksimum gambar */
-        height: auto;
+        min-height: 300px;
         /* Mengatur tinggi gambar sesuai dengan lebar */
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         /* Transisi untuk efek fade-in */
