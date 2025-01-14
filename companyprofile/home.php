@@ -72,36 +72,43 @@
         /* Ruang di antara item kategori */
         text-align: center;
         /* Menyelaraskan teks di tengah */
-        flex: 1 0 45%;
-        /* Mengatur lebar item kategori */
-        width: 300px;
-        /* Border untuk item kategori */
-        padding: 10px;
+        flex: 1 0 250px;
+        /* Lebar minimal fleksibel 250px, maksimal tergantung ruang */
+        max-width: 300px;
+        /* Batas lebar maksimal */
+        width: 100%;
+        /* Agar menyesuaikan ruang di dalam flexbox */
+        padding: 15px;
         /* Ruang di dalam item kategori */
+        border: 1px solid #ddd;
+        /* Border tipis untuk item kategori */
         border-radius: 15px;
         /* Sudut melengkung */
         background-color: #f9f9f9;
         /* Warna latar belakang item kategori */
-        margin-bottom: 20px;
-        /* Ruang di bawah item kategori */
-        font-size: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Efek bayangan */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Transisi untuk efek interaktif */
+        font-size: 1.2rem;
+        /* Ukuran font */
+    }
+
+    .categories li:hover {
+        transform: scale(1.05);
+        /* Sedikit memperbesar saat hover */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        /* Bayangan lebih dalam saat hover */
     }
 
     .categories img {
         display: block;
-        /* Mengubah display menjadi block */
         margin-left: auto;
-        /* Mengubah margin-left menjadi auto */
         margin-right: auto;
-        /* Mengubah margin-right menjadi auto */
-        width: 100%;
-        /* Mengatur lebar gambar menjadi 100% */
-        max-width: 250px;
-        /* Mengatur lebar maksimum gambar */
-        min-height: 300px;
-        /* Mengatur tinggi gambar sesuai dengan lebar */
+        width: 225px;
+        height: 300px;
+        object-fit: cover;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        /* Transisi untuk efek fade-in */
         border-radius: 10px;
     }
 
