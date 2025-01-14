@@ -77,18 +77,18 @@ if (isset($_POST['checkout'])) {
         if ($stmt_delete->execute()) {
             echo "<script>
                     alert('Checkout berhasil! Kode Reservasi Anda: $kode_reservasi Silahkan datang ke tempat sewa Hasogi Show Love untuk melakukan pengambilan barang dan pembayaran.');
-                    window.location.href = 'http://user/keranjang-user.php'; // Redirect ke halaman keranjang
+                    window.location.href = 'keranjang-user.php'; // Redirect ke halaman keranjang
                   </script>";
         } else {
             echo "<script>
                     alert('Gagal menghapus data dari keranjang.');
-                    window.location.href = 'http://user/keranjang-user.php'; // Redirect ke halaman keranjang
+                    window.location.href = 'keranjang-user.php'; // Redirect ke halaman keranjang
                   </script>";
         }
     } else {
         echo "<script>
                 alert('Gagal melakukan checkout.');
-                window.location.href = 'http://user/keranjang-user.php'; // Redirect ke halaman keranjang
+                window.location.href = 'keranjang-user.php'; // Redirect ke halaman keranjang
               </script>";
     }
 }

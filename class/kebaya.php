@@ -1,10 +1,10 @@
 <?php
 require_once 'database.php';
-require_once 'kebaya.php';
-class Produk
+
+class Kebaya
 {
-    private $conn;
-    private $table = 'hsl_kebaya';
+    protected $conn;
+    protected $table = 'hsl_kebaya';
 
     public function __construct()
     {

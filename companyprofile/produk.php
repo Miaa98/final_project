@@ -1,5 +1,34 @@
 <?php
 include '../database/db.php'; // Sertakan file koneksi database
+include '../class/kebaya.php'; // Sertakan file class Kebaya
+
+class Produk extends Kebaya
+{
+    protected $table = 'hsl_kebaya';
+
+    public function create($data)
+    {
+        $query = "INSERT INTO " . $this->table . " (model, deskripsi, harga, stock, foto, size, created_by) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ssdisis", $data['model'], $data['deskripsi'], $data['harga'], $data['stock'], $data['foto'], $data['size'], $data['created_by']);
+        return $stmt->execute();
+    }
+    public function getAvailableKebaya()
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE status = 'Available'";
+        $stmt = $this->conn->query($query);
+        return $stmt->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDetailByUuid($uuid)
+    {
+        $query = $this->conn->prepare("SELECT * FROM " . $this->table . " WHERE uuid = ?");
+        $query->bind_param("s", $uuid);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_assoc();
+    }
+}
 
 // Fetch kebaya data from the database
 $query = "SELECT * FROM products WHERE jenis = 'kebaya'"; // Adjust the query as needed
