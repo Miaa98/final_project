@@ -110,9 +110,9 @@ if (isset($_SESSION['user_id'])) {
                 if (isset($result) && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         // Format tanggal dd mmm yyyy
-                        $tanggal_reservasi = date("m D Y", strtotime($row['tanggal_reservasi']));
-                        $tanggal_mulai = date("m D Y", strtotime($row['tanggal_mulai']));
-                        $tanggal_selesai = date("m D Y", strtotime($row['tanggal_selesai']));
+                        $tanggal_reservasi = date("m d Y", strtotime($row['tanggal_reservasi']));
+                        $tanggal_mulai = date("m d Y", strtotime($row['tanggal_mulai']));
+                        $tanggal_selesai = date("m d Y", strtotime($row['tanggal_selesai']));
 
                         echo "<tr>";
                         echo "<td>" . $no++ . "</td>";
